@@ -35,7 +35,6 @@ sudo pacman -S --noconfirm \
     xclip \
     xorg-xinput \
     xdotool \
-    clipboard-manager \
     thunar \
     picom
 
@@ -94,17 +93,21 @@ super + q
     bspc node -c
 
 # Change focus
-super + {j,k,l,;h}
+super + {j,k,l,h}
     bspc node -f {south,north,east,west}
 EOL
+
+chmod +x ~/.config/sxhkd/sxhkdrc
 
 # Copy .xinitrc file to start bspwm
 cat <<EOL > ~/.xinitrc
 #!/bin/sh
 
-# Start bspwm and sxhkd
-exec bspwm &
-exec sxhkd
+# Start sxhkd
+sxhkd &
+
+# Start bspwm
+exec bspwm
 EOL
 
 chmod +x ~/.xinitrc
